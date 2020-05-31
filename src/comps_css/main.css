@@ -1,0 +1,14 @@
+main .phone{
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+main .phone a{
+    color:green;
+    font-weight: bold;
+    transition: 0.8s;
+}
+
+main .phone:hover a{
+    color:rebeccapurple;
+    transform: scale(1.2,1.2);
+}
