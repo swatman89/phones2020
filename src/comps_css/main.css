@@ -1,14 +1,48 @@
 main .phone{
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+    overflow: hidden;
 }
 
 main .phone a{
     color:green;
     font-weight: bold;
     transition: 0.8s;
+  
 }
 
 main .phone:hover a{
     color:rebeccapurple;
     transform: scale(1.2,1.2);
 }
+
+main .phone .box{
+    display: flex;
+    width:25%;
+    float:left;
+    padding-top: 25%;
+    background-color: darkblue;
+    background-size: cover;
+}
+
+main .phone img{
+    max-height: 150px;
+}
+
+.info_phone div {
+    
+}
+
+
+
+.info_phone span{
+    background-color: #ccc;
+    width:30%;
+    display: inline-block;
+    margin:8px 0;
+  }
+
+  .info_phone span strong{
+    background-color: skyblue;  
+    padding:0 8px; 
+    display: inline-block;
+  }

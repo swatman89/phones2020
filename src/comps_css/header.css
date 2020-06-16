@@ -51,7 +51,10 @@ header .boxes .link {
 
 
 /* purple  background-color: rgb(58,61,267); */
-
 @media screen and (max-width:728px){
 
+    header .boxes > div {
+        flex:none;
+        width:46%;
+    }
 }

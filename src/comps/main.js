@@ -8,20 +8,22 @@ const Main = (props) => {
   let [phones_ar, setPhonesArr] = useState([]);
   let order = useSelector(state => state.order);
   let dispatch = useDispatch()
+  let serUrl = useSelector(state => state.URL)
+  console.log(serUrl)
 
   useEffect(() => {
-    let url = "http://localhost/doria/phones/list.php"
+    let url = serUrl+"/list.php"
     try {
       if (props.match.params.id) {
         console.log("there is params " + props.match.params.id)
         dispatch({type:"changeOrder",order:props.match.params.id});
-        url = `http://localhost/doria/phones/search.php?order=${order}&reverse=ok`
+        url = `${serUrl}/search.php?order=${order}&reverse=ok`
       }
     }
     catch(err){
       if (order !== "id") {
         console.log("no params")
-        url = `http://localhost/doria/phones/search.php?order=${order}&reverse=ok`
+        url = `${serUrl}/search.php?order=${order}&reverse=ok`
       }
     }
     
@@ -46,8 +48,8 @@ const Main = (props) => {
   }
 
   return (
-    <main className="container-fluid py-3">
-      <div className="container">
+    <main className="container-fluid py-3" id="start_phones">
+      <div className="container" >
         <h2> הטלפונים המובילים לפי {catName[order]}</h2>
         <div className="row">
           {phones_ar.map(item => {

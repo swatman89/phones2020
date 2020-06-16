@@ -1,42 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { doApi } from '../services/apiSer';
-import {  Link  } from 'react-router-dom';
-import {  useHistory  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 
 function SinglePhone(props) {
-  let [item,setPhone] = useState({})
+  let [item, setPhone] = useState({})
   let history = useHistory()
+  let serUrl = useSelector(state => state.URL)
   //  TODO: לעשות שלוחצים על הלינק מחזיר אותנו מהדף שבאנו אליו
-  useEffect(() => { 
-    let url = "http://localhost/doria/phones/single.php?id="+props.match.params.id;
+  useEffect(() => {
+    let url = serUrl+"/single.php?id=" + props.match.params.id;
     doApi(url)
-    .then(data => {
-      console.log(data)
-      setPhone(data[0])
-     
-    })
-}, [])
+      .then(data => {
+        console.log(data)
+        setPhone(data[0])
+
+      })
+  }, [])
 
 
 
-  
+
   return (
     <main className="container-fluid py-3">
       <div className="container">
-        <div className="col-lg-8 border p-2">
-          <h2>{item.name}</h2>
-          <img className="card-img-right flex-auto d-none d-md-block float-right ml-3" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" src={item.img_url} height="250" />
-          <div>זכרון לשמירה: <strong>{item.storage_gb} GB</strong> </div>
-          <div>איכות צילום: <strong className='text-success'>{item.camera_score} </strong>, מגה פיקסל: {item.m_pixel} </div>
-          <div>ציון סוללה <strong className='text-success'>{item.battery_score} </strong> </div>
-          <div>איכות קליטה אינטרנט/שיחות: <strong>{item.connect_score} </strong> </div>
-          <div>גודל מסך: <strong>{item.screen_size} </strong> </div>
-          <div>ציון ביצועים: <strong className='text-danger'>{item.pref_score} </strong> </div>
-          <div>זכרון RAM: <strong>{item.ram} </strong> </div>
-          <div>סוג מעבד: <strong>{item.cpu} </strong> </div>
-          <div>סוג כרטיס מסך: <strong>{item.gpu} </strong> </div>
-          <div>מחיר מנימום ממוצע בארץ: <strong>{item.price} ש"ח</strong> </div>
-          <Link to="/">חזור לרשימה</Link>
+        <div className="col-lg-9 border p-2 info_phone row align-items-center">
+         
+          <div className='col-lg-8'>
+            <h2>{item.name}</h2>
+            <div>זכרון לשמירה: <strong>{item.storage_gb} GB</strong> </div>
+            <div>איכות צילום: <span><strong style={{ width: (item.camera_score) + "%" }}>{item.camera_score} </strong></span> </div>
+            <div>ציון סוללה <span><strong style={{ width: (item.battery_score) + "%" }}>{item.battery_score} </strong></span> </div>
+            <div>איכות קליטה: <span><strong style={{ width: (item.connect_score) + "%" }}>{item.connect_score} </strong></span> </div>
+            <div>ציון ביצועים: <span><strong className='text-danger' style={{ width: (item.pref_score / 600 * 100) + "%" }}>{item.pref_score} </strong></span> </div>
+            <div>מחיר ממוצע בארץ  (בש"ח): <span><strong style={{ width: 100 - (item.price / 3000 * 100) + "%" }}>{item.price}</strong> </span> </div>
+            <div>מצלמה מגה פיקסל: <strong >{item.m_pixel}</strong> </div>
+            <div>גודל מסך: <strong>{item.screen_size} </strong> </div>
+            <div style={{ direction: "rtl" }}>RAM זכרון: <strong>{item.ram} </strong> GB </div>
+            <div>סוג מעבד: <strong>{item.cpu} </strong> </div>
+            <div>סוג כרטיס מסך: <strong>{item.gpu} </strong> </div>
+            <Link to="/">חזור לרשימה</Link>
+          </div>
+          <div className="col-lg-4  text-left" style={{ textAlign: "left" }}>
+            <img className="  d-md-block  " data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" src={item.img_url} height="250" />
+          </div>
         </div>
       </div>
     </main>

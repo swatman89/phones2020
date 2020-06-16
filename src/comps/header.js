@@ -4,6 +4,8 @@ import "../comps_css/header.css"
 import {  useDispatch } from 'react-redux'
 import {  useHistory  } from 'react-router-dom';
 
+import * as Scroll from 'react-scroll';
+
 const Header = (props) => {
     let dispatch = useDispatch()
     let history = useHistory()
@@ -12,7 +14,14 @@ const Header = (props) => {
         console.log(e.currentTarget.dataset.ord)
         let orderBy = e.currentTarget.dataset.ord
         dispatch({type:"changeOrder",order:orderBy});
-        history.push("/phones/"+orderBy)
+        history.push("/phones/"+orderBy+"#start_phones")
+        try{
+        var rect = document.querySelector("#start_phones").getBoundingClientRect();
+        Scroll.animateScroll.scrollTo(rect.top)
+        }
+        catch(err){
+            
+        }
     }
 
   return(
@@ -22,7 +31,7 @@ const Header = (props) => {
           <h2>האתר הראשון בארץ להשוואה אמיתית בין סמרטפונים</h2>
           <hr/>
           <h3 className="text-center">איזה תחום הכי חשוב לך בסמרטפון הבא שלך?</h3>
-            <div className="d-lg-flex boxes">
+            <div className="row boxes">
                 <div data-ord="pref_score" onClick={changeOrder}>
                     
                     <i className="fa fa-gamepad"></i>
