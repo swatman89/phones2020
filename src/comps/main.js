@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { doApi } from '../services/apiSer'
-import Phone from './phone'
+import Phone from './phoneItem'
 import "../comps_css/main.css"
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -38,10 +38,10 @@ const Main = (props) => {
 
   let catName = {
     id: "כללי",
-    pref_score: "ביצועים למשחקים",
+    pref_score: "ביצועים למשחקים לפי אנטוטו",
     camera_score: "ציון מצלמה",
     storage_gb: "נפח שמירה",
-    battery_score: "זמן סוללה",
+    battery_score: "ציון סוללה",
     connect_score: "איכות קליטה",
     screen_size: "גודל מסך",
     total_score: "תמורה יחס מחיר"
@@ -55,7 +55,7 @@ const Main = (props) => {
           {phones_ar.map(item => {
 
             return (
-              <Phone key={item.id} item={item} />
+              <Phone key={item.id} item={item} catName={catName[order]} sortBy={order} />
             )
           })}
 

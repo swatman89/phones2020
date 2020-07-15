@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const Phone = (props) => {
+const PhoneItem = (props) => {
 
 
   let item = props.item;
@@ -11,7 +11,7 @@ const Phone = (props) => {
       <div className="mb-4 box-shadow h-md-250 phone p-2">
       {/* <img className="float-left w-25"  
           alt="Thumbnail [200x250]" src={item.img_url} /> */}
-          <div className="box" style={{backgroundImage:"url("+item.img_url+")"}}>_</div>
+          <div  className="box" style={{backgroundImage:"url("+item.img_url+")",color:"white"}}>_</div>
 
           <h4 className="mb-0">
             <a className="text-dark" href="#">{item.name}</a>
@@ -19,8 +19,9 @@ const Phone = (props) => {
           <div className="mb-1 text-muted">ציון כללי: {total_score}</div>
           <div className="card-text mb-auto">
             <div>זכרון לשמירה: <strong>{storage_gb} GB</strong> </div>
-            <div>איכות לצילום: <strong>{camera_score} </strong> </div>
-            <div>ציון ביצועים <strong>{pref_score} </strong> </div>
+            {/* <div>איכות לצילום: <strong>{camera_score} </strong> </div> */}
+            <div>{props.catName}: <strong>{item[props.sortBy]} </strong> </div>
+            <div>מחיר ממוצע בארץ: <strong>{price} ש"ח </strong> </div>
 
           
           <Link to={"/smartphone/" + item.id}>פרטים נוספים</Link>
@@ -35,4 +36,4 @@ const Phone = (props) => {
 }
 
 
-export default Phone;
+export default PhoneItem;

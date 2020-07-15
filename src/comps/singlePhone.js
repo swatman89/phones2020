@@ -20,7 +20,10 @@ function SinglePhone(props) {
   }, [])
 
 
-
+  const clickLink = () => {
+    history.goBack()
+    // alert("link")
+  }
 
   return (
     <main className="container-fluid py-3">
@@ -33,17 +36,22 @@ function SinglePhone(props) {
             <div>איכות צילום: <span><strong style={{ width: (item.camera_score) + "%" }}>{item.camera_score} </strong></span> </div>
             <div>ציון סוללה <span><strong style={{ width: (item.battery_score) + "%" }}>{item.battery_score} </strong></span> </div>
             <div>איכות קליטה: <span><strong style={{ width: (item.connect_score) + "%" }}>{item.connect_score} </strong></span> </div>
-            <div>ציון ביצועים: <span><strong className='text-danger' style={{ width: (item.pref_score / 600 * 100) + "%" }}>{item.pref_score} </strong></span> </div>
+            <div>ציון ביצועים: <span><strong className='text-danger' style={{ width: (item.pref_score / 600 * 100) + "%" }}>{Math.floor(item.pref_score / 600 * 100)} %</strong></span> </div>
             <div>מחיר ממוצע בארץ  (בש"ח): <span><strong style={{ width: 100 - (item.price / 3000 * 100) + "%" }}>{item.price}</strong> </span> </div>
             <div>מצלמה מגה פיקסל: <strong >{item.m_pixel}</strong> </div>
             <div>גודל מסך: <strong>{item.screen_size} </strong> </div>
             <div style={{ direction: "rtl" }}>RAM זכרון: <strong>{item.ram} </strong> GB </div>
             <div>סוג מעבד: <strong>{item.cpu} </strong> </div>
             <div>סוג כרטיס מסך: <strong>{item.gpu} </strong> </div>
-            <Link to="/">חזור לרשימה</Link>
+            <Link to="#" onClick={clickLink} >חזור לרשימה</Link>
           </div>
           <div className="col-lg-4  text-left" style={{ textAlign: "left" }}>
+            {(item.img_url)? (
             <img className="  d-md-block  " data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" src={item.img_url} height="250" />
+            ) : (
+              <img className="d-md-block  " data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" src="/loading.gif" height="250" />
+
+            )}
           </div>
         </div>
       </div>
